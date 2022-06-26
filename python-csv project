@@ -1,0 +1,118 @@
+print("********************************************************************* NIKKI FASHION MALL **************************************************************************")
+print()
+print()
+print("************************************************************************** WELCOME ***************************************************************************************")
+import pickle
+import sys
+import os
+
+print("PRESS 1 TO START OR 2 TO END")
+c=int(input("enter your choise"))
+
+if c==1:
+    import csv
+    import os
+
+
+    def write():
+        f=open("school.csv","a",newline='')
+        w=csv.writer(f)
+        l=["name","address","phone"]
+        n=int(input("enter how many number of people information you have to write here"))
+        for x in range(n):
+            name=input("enter your name")
+            address=input("enter your address")
+            phone=input("enter your phone number")
+            if len(phone)==10:
+                pass
+            else:
+                print("your number is wrong please chek it again")
+            l=[name,address,phone]
+            w.writerow(l)
+        f.close()
+        f=open("school.csv","r",newline='')
+        exm=csv.reader(f)
+        for i in exm:
+            print(i)
+        f.close()
+
+
+    
+    def display():
+        f=open("school.csv","r",newline='')
+        exm=csv.reader(f)
+        for i in exm:
+            print(i)
+        f.close()
+
+
+    def update():
+        f=open("school.csv","r")
+        f1=open("temp.csv","a",newline='')
+        stud=csv.reader(f)
+        r=input("enter name you want to update")
+        for i in stud:
+            if i[0]==r:
+                print("enter new data")
+                name=input("enter the new name")
+                address=input("enter the address")
+                phone_no=int(input("enter the phone_no"))
+                l=[name,address,phone_no]
+                w=csv.writer(f1) 
+                w.writerow(l)
+            else:
+                w=csv.writer(f1) 
+                w.writerow(i)
+        f.close()
+        f1.close()
+        os.remove("school.csv")
+        os.rename("temp.csv","school.csv")
+        f=open("school.csv","r")
+        stud=csv.reader(f)
+        for i in stud:
+            print(i)
+        f.close()
+
+
+
+    def delete():
+        lines=list()
+        members=input("Please enter a member's name to be deleted.")
+        with open('school.csv','r',newline='') as readFile:
+            reader = csv.reader(readFile)
+            for row in reader:
+                lines.append(row)
+                for field in row:
+                    if field == members:
+                        lines.remove(row)
+            with open('school.csv', 'w',newline='') as writeFile:
+                writer = csv.writer(writeFile)
+                writer.writerows(lines)
+        readFile.close()
+        f=open("school.csv","r",newline='')
+        exm=csv.reader(f)
+        for i in exm:
+            print(i)
+        f.close()
+            
+            
+    
+    #main programming
+    
+    while True:
+        print("MENU \n1=WRITE \n2=DISPLAY \n3=UPDATE \n4=DELETE \n5=exit")
+        ch=int(input("enter the number"))
+        if ch==1:
+            write()
+        if ch==2:
+            display()
+        if ch==3:
+            update()
+        if ch==4:
+            delete()
+        if ch==5:
+            print("THANK YOU")
+            sys.exit()
+if c==2:
+    print("Thank you")
+    sys.exit
